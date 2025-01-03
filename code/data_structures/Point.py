@@ -3,6 +3,9 @@ class Point:
         self.x = x
         self.y = y
     
+    def to_tuple(self):
+        return (self.x, self.y)
+
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
     
