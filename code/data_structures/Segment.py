@@ -1,4 +1,4 @@
-from data_structures.Point import Point
+from Point import Point
 
 class Segment:
     def __init__(self, p1, p2):
