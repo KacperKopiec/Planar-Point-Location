@@ -1,10 +1,23 @@
 from Point import Point
+import numpy as np
 
 class Segment:
     def __init__(self, p1, p2):
         if p1 > p2: p1, p2 = p2, p1
         self.left = p1
         self.right = p2
+        # Ax + By + C = 0
+        # y = (-Ax-C)/B
+        self.A = p2.y - p1.y
+        self.B = p1.x - p2.x
+        self.C = -self.A * p1.x - self.B * p1.y
+        Z = np.sqrt(self.A * self.A + self.B * self.B)
+        self.A /= Z
+        self.B /= Z
+        self.C /= Z
+
+    def value_for_x(self,x):
+        return (-self.A * x - self.C)/self.B
 
     def __det(self, a, b, c):
         return a[0] * b[1] + a[1] * c[0] + b[0] * c[1] - b[1] * c[0] - a[0] * c[1] - a[1] * b[0]
