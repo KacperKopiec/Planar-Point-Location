@@ -7,7 +7,6 @@ class Trapezoid:
         self.right = right
         self.top = top
         self.bottom = bottom
-    
         self.nextUp = None
         self.nextDown = None
 

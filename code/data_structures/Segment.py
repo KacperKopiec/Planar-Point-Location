@@ -1,4 +1,4 @@
-from Point import Point
+from data_structures.Point import Point
 import numpy as np
 
 class Segment:

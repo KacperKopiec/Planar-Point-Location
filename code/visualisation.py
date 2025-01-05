@@ -4,7 +4,6 @@ from data_structures.Trapezoid import Trapezoid
 import matplotlib.pyplot as plt
 
 
-
 def show_map(Trapezoids : list[Trapezoid] , lines : list[Segment], q : Point, found : Trapezoid  ):
     plt.figure(figsize = (5,5))
     plt.axis("off")
