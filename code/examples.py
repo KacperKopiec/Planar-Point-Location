@@ -19,3 +19,19 @@ ex2 = [
     Segment(Point(218, 229), Point(472, 384)),
     Segment(Point(392, 281), Point(496, 298)),
 ]
+
+serce = [
+    Segment(Point(173, 34), Point(322, -107)),
+    Segment(Point(147, 131), Point(173, 34)),
+    Segment(Point(148, 131), Point(182, 212)),
+    Segment(Point(182, 212), Point(272, 240)),
+    Segment(Point(272, 240), Point(365, 171)),
+    Segment(Point(366, 169), Point(466, 233)),
+    Segment(Point(466, 233), Point(556, 217)),
+    Segment(Point(556, 217), Point(574, 149)),
+    Segment(Point(520, 69), Point(574, 149)),
+    Segment(Point(465, -9), Point(520, 69)),
+    Segment(Point(375, -106), Point(465, -9)),
+    Segment(Point(346, -167), Point(375, -107)),
+    Segment(Point(323, -109), Point(346, -167)),
+]

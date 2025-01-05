@@ -1,5 +1,5 @@
 from data_structures.Point import Point
-import numpy as np
+from numpy import sqrt
 
 class Segment:
     def __init__(self, p1, p2):
@@ -10,7 +10,7 @@ class Segment:
         self.A = p2.y - p1.y
         self.B = p1.x - p2.x
         self.C = -self.A * p1.x - self.B * p1.y
-        Z = np.sqrt(self.A * self.A + self.B * self.B)
+        Z = sqrt(self.A * self.A + self.B * self.B)
         self.A /= Z
         self.B /= Z
         self.C /= Z
