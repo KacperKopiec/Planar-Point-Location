@@ -1,5 +1,5 @@
-from Point import Point
-from Segment import Segment
+from data_structures.Point import Point
+from data_structures.Segment import Segment
 
 class Trapezoid:
     def __init__(self, left: Point, right: Point, top: Segment, bottom: Segment):
@@ -9,6 +9,8 @@ class Trapezoid:
         self.bottom = bottom
         self.nextUp = None
         self.nextDown = None
+        self.prevUp = None
+        self.prevDown = None
 
     def trapezoidBoundary(self):
         bottom = self.bottom

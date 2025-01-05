@@ -34,7 +34,10 @@ def draw():
         nonlocal lines
         nonlocal new_lines
         new_lines = [((seg.left.x,500-seg.left.y),(seg.right.x,500-seg.right.y)) for seg in lines]
-        print(f"{new_lines}")
+        print("segments = [")
+        for a, b in new_lines:
+            print(f"    Segment(Point{a}, Point{b}),")
+        print("]")
         root.quit()
         root.destroy() 
     close_button = tk.Button(root, text="Zakończ", command=close_window)
