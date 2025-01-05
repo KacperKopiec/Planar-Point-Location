@@ -1,4 +1,4 @@
-from Point import Point
+from data_structures.Point import Point
 import numpy as np
 
 class Segment:
@@ -17,7 +17,7 @@ class Segment:
         self.C /= Z
 
     def value_for_x(self,x):
-        return (-self.A * x - self.C)/self.B
+        return Point(x,(-self.A * x - self.C)/self.B)
 
     def __det(self, a, b, c):
         return a[0] * b[1] + a[1] * c[0] + b[0] * c[1] - b[1] * c[0] - a[0] * c[1] - a[1] * b[0]

@@ -41,3 +41,5 @@ def draw():
     close_button.pack(pady=20)
     canvas.mainloop()
     return new_lines
+
+draw()
