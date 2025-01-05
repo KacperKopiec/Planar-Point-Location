@@ -7,7 +7,6 @@ class Segment:
         self.left = p1
         self.right = p2
         # Ax + By + C = 0
-        # y = (-Ax-C)/B
         self.A = p2.y - p1.y
         self.B = p1.x - p2.x
         self.C = -self.A * p1.x - self.B * p1.y

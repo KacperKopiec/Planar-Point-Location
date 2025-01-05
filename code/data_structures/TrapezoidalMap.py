@@ -7,23 +7,19 @@ from data_structures.TrapezoidNode import TrapezoidNode
 from numpy.random import permutation
 from math import ceil
 
-class Trapezoidal_map:
+class TrapezoidalMap:
     def __init__(self, segments: list[Segment]):
         self.segments = permutation(segments)
-        # self.segments = segments
         self.root = TrapezoidNode(self.createBoundary())
         self.trapezoids = set([self.root.data])
         self.frames = [self.getTrapezoids()]
         for i, s in enumerate(self.segments):
-            # print(s)
             intersections = self.intersectingTrapezoids(s)
-            # print(len(intersections))
             if len(intersections) == 1:
-                self.__changeOne(intersections[0], s)
+                self.changeOne(intersections[0], s)
             else:
-                self.__changeMoreThanOne(intersections, s)
+                self.changeMoreThanOne(intersections, s)
             self.frames.append(self.getTrapezoids())
-            # if i == 5: break
 
     def createBoundary(self):
         x_mn, y_mn, x_mx, y_mx = float('inf'), float('inf'), float('-inf'), float('-inf')
@@ -72,7 +68,7 @@ class Trapezoidal_map:
             p = segment.value_for_x(cur.data.right.x)
         return leaves
 
-    def __changeOne(self, node: TrapezoidNode, segment: Segment):
+    def changeOne(self, node: TrapezoidNode, segment: Segment):
         nd = PointNode(segment.left)
         nd.setLeft(TrapezoidNode(Trapezoid(node.data.left, segment.left, node.data.top, node.data.bottom)))
         nd.setRight(PointNode(segment.right))
@@ -124,11 +120,10 @@ class Trapezoidal_map:
         if len(node.parents) == 0: self.root = nd
         node.replace(nd)
 
-    def __changeMoreThanOne(self, nodes: list[TrapezoidNode], segment: Segment):
+    def changeMoreThanOne(self, nodes: list[TrapezoidNode], segment: Segment):
         mergeUp = -1
         upTrap, downTrap = None, None
         for idx, node in enumerate(nodes):
-            # print(idx, node.data)
             if idx == 0:
                 nd = PointNode(segment.left)
                 nd.setLeft(TrapezoidNode(Trapezoid(node.data.left, segment.left, node.data.top, node.data.bottom)))

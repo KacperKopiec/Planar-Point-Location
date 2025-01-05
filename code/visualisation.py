@@ -1,11 +1,11 @@
 from data_structures.Point import Point
 from data_structures.Segment import Segment
 from data_structures.Trapezoid import Trapezoid
-from data_structures.TrapezoidalMap import Trapezoidal_map
+from data_structures.TrapezoidalMap import TrapezoidalMap
 import matplotlib.pyplot as plt
 
 
-def show_map(map: Trapezoidal_map, Trapezoids: list[Trapezoid], lines: list[Segment], q: Point = None, found: Trapezoid = None):
+def showMap(map: TrapezoidalMap, Trapezoids: list[Trapezoid], lines: list[Segment], q: Point = None, found: Trapezoid = None):
     plt.figure(figsize = (5,5))
     plt.axis("off")
     for line in lines:
@@ -29,3 +29,8 @@ def show_map(map: Trapezoidal_map, Trapezoids: list[Trapezoid], lines: list[Segm
         plt.plot([B.x, D.x], [B.y, D.y], color = "red")
 
     plt.show()
+
+def mapBuildingSteps(segments: list[Segment]):
+    T = TrapezoidalMap(segments)
+    for s in range(len(T.frames)):
+        showMap(T, T.frames[s], T.segments[:s])
