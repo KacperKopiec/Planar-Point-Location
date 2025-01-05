@@ -12,7 +12,7 @@ class Trapezoid:
         self.nextDown = None
 
     def __hash__(self):
-        return hash((self.left, self.right))
+        return hash((self.left, self.right, self.top, self.bottom))
     
     def __str__(self):
         return f"lp:[{self.left}], rp:[{self.right}], top:[{self.top}], bot:[{self.bottom}]"

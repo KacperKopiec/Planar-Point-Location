@@ -8,9 +8,9 @@ class PointNode:
         return 0
     
     def setLeft(self, node):
-        if node.getType() == 2: node.partents.append(self)
+        if node.getType() == 2: node.parents.append(self)
         self.left = node
     
     def setRight(self, node):
-        if node.getType() == 2: node.partents.append(self)
+        if node.getType() == 2: node.parents.append(self)
         self.right = node

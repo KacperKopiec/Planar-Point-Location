@@ -9,6 +9,6 @@ class TrapezoidNode:
     def replace(self, node):
         for parent in self.parents:
             if parent.left == self:
-                parent.left = node
+                parent.setLeft(node)
             else:
-                parent.right = node
+                parent.setRight(node)
