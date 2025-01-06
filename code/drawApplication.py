@@ -1,6 +1,7 @@
 import tkinter as tk
 from data_structures.Point import Point
 from data_structures.Segment import Segment
+from data_structures.TrapezoidalMap import *
 
 def draw():
     root = tk.Tk()
@@ -62,4 +63,7 @@ def draw():
     close_button.pack(pady=20)
     canvas.mainloop()
     return new_lines,q
-print(draw())
+
+
+
+

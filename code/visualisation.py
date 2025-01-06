@@ -5,6 +5,7 @@ from data_structures.TrapezoidalMap import TrapezoidalMap
 import matplotlib.pyplot as plt
 from PIL import Image
 import io
+from drawApplication import *
 
 
 def showMap(map: TrapezoidalMap, Trapezoids: list[Trapezoid], lines: list[Segment], q: Point = None):
@@ -38,7 +39,7 @@ def mapBuildingSteps(segments: list[Segment], random=True):
     for s in range(len(T.frames)):
         showMap(T, T.frames[s], T.segments[:s])
 
-def makeGif(segments: list[Segment], name : str, q: Point, random=True):
+def makeGif(segments: list[Segment], name : str = "Przyklad", q: Point = None, random=True):
     T = TrapezoidalMap(segments, visualisation=True, random=random)
     frames = []
     for s in range(len(T.frames)):
@@ -72,3 +73,35 @@ def makeGif(segments: list[Segment], name : str, q: Point, random=True):
         plt.close(fig)
     frames[0].save(f'../gify/{name}.gif', save_all=True, append_images=frames[1:], duration=200, loop=0)
     
+def drawAndSave(name: str = "test"):
+    segments,q = draw()
+    T = TrapezoidalMap(segments,True)
+    showMap(T,T.frames[-1],T.segments,q)
+    with open(f"../trapezy/{name}.txt", "w") as plik:  
+        plik.write("Zadane Segmenty: \n")
+        for seg in segments:
+            plik.write(f"{seg}")
+        plik.write("\nUtworzone Trapezy: \n")
+        for trapez in T.frames[-1]:
+            plik.write(f"{trapez}\n")
+        if q is not None:
+            plik.write(f"Trapez w którym jest punkt: \n{T.query(q).data}")
+    plik.close()
+
+def fromFile(segments: list[Segment],q:Point = None, name: str = "test"):
+    T = TrapezoidalMap(segments,True)
+    showMap(T,T.frames[-1],T.segments,q)
+    with open(f"../trapezy/{name}.txt", "w") as plik:  
+        plik.write("Zadane Segmenty: \n")
+        for seg in segments:
+            plik.write(f"{seg}")
+        plik.write("\nUtworzone Trapezy: \n")
+        for trapez in T.frames[-1]:
+            plik.write(f"{trapez}\n")
+        if q is not None:
+            plik.write(f"Trapez w którym jest punkt: \n{T.query(q).data}")
+    plik.close()
+
+def drawAndMakeGif(name: str = "przyklad"):
+    segments, q = draw()
+    makeGif(segments,name,q)

@@ -11,6 +11,11 @@ def randomPoint(mapa : TrapezoidalMap, n: int = 1):
     for _ in range(n):
         punkty.append(Point(np.random.uniform(A.x,D.x),np.random.uniform(A.y,B.y)))
     return punkty
+def changeToSegments(lista: list[tuple]):
+    segments = []
+    for a,b in lista:
+        segments+=[Segment(Point(a.x,a.y),Point(b.x,b.y))]
+    return segments
 
 def generateSegment(n: int,a: int = 0,b: int = 1000):
     X = set()
@@ -35,11 +40,6 @@ def generateSegment(n: int,a: int = 0,b: int = 1000):
         Y.add(y)
         count+=1
     return segments
-
-def test(segments: list[Segment],flag: bool = True):
-    T = TrapezoidalMap(segments)
-    # q = randomPoint(T)
-    # if flag: showMap(T, T.getTrapezoids(), T.segments,q,T.query(q).data)
 
 size = [10,50,200,400,700,1000,3000,5000,8000,10000,15000,20000,30000,50000,75000,100000]
 
@@ -75,6 +75,6 @@ def testTime(size: list[int]):
     plt.plot(size, p_s(size))
     plt.scatter(size, search, color = 'blue')
     plt.show()
-    print(buld,search)
+   
 
-testTime(size)
+
