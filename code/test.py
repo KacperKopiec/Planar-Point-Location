@@ -75,6 +75,3 @@ def testTime(size: list[int]):
     plt.plot(size, p_s(size))
     plt.scatter(size, search, color = 'blue')
     plt.show()
-   
-
-

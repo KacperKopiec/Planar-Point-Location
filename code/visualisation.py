@@ -103,6 +103,3 @@ def fromFile(segments: list[Segment],q:Point = None, name: str = "test"):
             plik.write(f"Trapez w którym jest punkt: \n{T.query(q).data}")
     plik.close()
     return T,q
-
-
-    
