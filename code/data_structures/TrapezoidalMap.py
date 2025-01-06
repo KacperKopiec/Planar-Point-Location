@@ -19,7 +19,7 @@ class TrapezoidalMap:
                 self.changeOne(intersections[0], s)
             else:
                 self.changeMoreThanOne(intersections, s)
-            self.frames.append(self.getTrapezoids())
+            # self.frames.append(self.getTrapezoids())
 
     def createBoundary(self):
         x_mn, y_mn, x_mx, y_mx = float('inf'), float('inf'), float('-inf'), float('-inf')
