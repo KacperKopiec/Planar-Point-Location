@@ -8,8 +8,9 @@ from numpy.random import permutation
 from math import ceil
 
 class TrapezoidalMap:
-    def __init__(self, segments: list[Segment]):
-        self.segments = permutation(segments)
+    def __init__(self, segments: list[Segment], visualisation = False, random = True):
+        if random: self.segments = permutation(segments)
+        else: self.segments = segments
         self.root = TrapezoidNode(self.createBoundary())
         self.trapezoids = set([self.root.data])
         self.frames = [self.getTrapezoids()]
@@ -19,7 +20,7 @@ class TrapezoidalMap:
                 self.changeOne(intersections[0], s)
             else:
                 self.changeMoreThanOne(intersections, s)
-            # self.frames.append(self.getTrapezoids())
+            if visualisation: self.frames.append(self.getTrapezoids())
 
     def createBoundary(self):
         x_mn, y_mn, x_mx, y_mx = float('inf'), float('inf'), float('-inf'), float('-inf')

@@ -7,7 +7,7 @@ from PIL import Image
 import io
 
 
-def showMap(map: TrapezoidalMap, Trapezoids: list[Trapezoid], lines: list[Segment], q: Point = None, found: Trapezoid = None):
+def showMap(map: TrapezoidalMap, Trapezoids: list[Trapezoid], lines: list[Segment], q: Point = None):
     plt.figure(figsize = (5,5))
     plt.axis("off")
     for line in lines:
@@ -17,13 +17,14 @@ def showMap(map: TrapezoidalMap, Trapezoids: list[Trapezoid], lines: list[Segmen
         plt.plot([A.x, B.x], [A.y, B.y], color = "green")
         plt.plot([C.x, D.x], [C.y, D.y], color = "green")
     A,B,C,D = map.createBoundary().trapezoidBoundary()
-    plt.plot([A.x, B.x], [A.y, B.y], color = "green")
-    plt.plot([C.x, D.x], [C.y, D.y], color = "green")
-    plt.plot([A.x, C.x], [A.y, C.y], color = "green")
-    plt.plot([B.x, D.x], [B.y, D.y], color = "green")
+    plt.plot([A.x, B.x], [A.y, B.y], color = "black")
+    plt.plot([C.x, D.x], [C.y, D.y], color = "black")
+    plt.plot([A.x, C.x], [A.y, C.y], color = "black")
+    plt.plot([B.x, D.x], [B.y, D.y], color = "black")
 
-    if q is not None: plt.scatter([q.x],[q.y], color = "red")
-    if found is not None:
+    if q is not None: 
+        plt.scatter([q.x],[q.y], color = "red")
+        found = map.query(q).data
         A,B,C,D = found.trapezoidBoundary()
         plt.plot([A.x, B.x], [A.y, B.y], color = "red")
         plt.plot([C.x, D.x], [C.y, D.y], color = "red")
@@ -32,13 +33,13 @@ def showMap(map: TrapezoidalMap, Trapezoids: list[Trapezoid], lines: list[Segmen
 
     plt.show()
 
-def mapBuildingSteps(segments: list[Segment]):
-    T = TrapezoidalMap(segments)
+def mapBuildingSteps(segments: list[Segment], random=True):
+    T = TrapezoidalMap(segments, visualisation=True, random=random)
     for s in range(len(T.frames)):
         showMap(T, T.frames[s], T.segments[:s])
 
-def makeGif(segments: list[Segment], name : str, q: Point):
-    T = TrapezoidalMap(segments)
+def makeGif(segments: list[Segment], name : str, q: Point, random=True):
+    T = TrapezoidalMap(segments, visualisation=True, random=random)
     frames = []
     for s in range(len(T.frames)):
         fig,ax = plt.subplots(figsize = (5,5))

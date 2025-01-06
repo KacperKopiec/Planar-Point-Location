@@ -35,3 +35,19 @@ serce = [
     Segment(Point(346, -167), Point(375, -107)),
     Segment(Point(323, -109), Point(346, -167)),
 ]
+dlugi = [
+    
+    Segment(Point(386, 37), Point(574, -39)),
+    Segment(Point(490, 27), Point(628, 59)),
+    Segment(Point(422, 231), Point(514, 249)),
+    Segment(Point(100, 277), Point(254, 108)),
+    Segment(Point(141, -63), Point(322, 21)),
+    Segment(Point(208, -93), Point(430, -145)),
+    Segment(Point(71, 45), Point(657, 118)),
+]
+
+calosc = [
+    Segment(Point(115, 103), Point(537, 271)),
+    Segment(Point(58, -107), Point(623, -202)),
+    Segment(Point(246, -14), Point(431, 17)),
+]

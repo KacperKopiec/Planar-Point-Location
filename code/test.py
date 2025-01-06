@@ -41,7 +41,7 @@ def test(segments: list[Segment],flag: bool = True):
     # q = randomPoint(T)
     # if flag: showMap(T, T.getTrapezoids(), T.segments,q,T.query(q).data)
 
-size = [10,50,200,400,700,1000,3000,5000,8000,10000,15000,20000,30000,50000]
+size = [10,50,200,400,700,1000,3000,5000,8000,10000,15000,20000,30000,50000,75000,100000]
 
 def testTime(size: list[int]):
     buld = []
