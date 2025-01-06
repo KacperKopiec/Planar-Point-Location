@@ -34,10 +34,11 @@ def showMap(map: TrapezoidalMap, Trapezoids: list[Trapezoid], lines: list[Segmen
 
     plt.show()
 
-def mapBuildingSteps(segments: list[Segment], random=True):
+def mapBuildingSteps(segments: list[Segment],q : Point = None, random=True):
     T = TrapezoidalMap(segments, visualisation=True, random=random)
     for s in range(len(T.frames)):
         showMap(T, T.frames[s], T.segments[:s])
+    showMap()
 
 def makeGif(segments: list[Segment], name : str = "Przyklad", q: Point = None, random=True):
     T = TrapezoidalMap(segments, visualisation=True, random=random)
@@ -57,10 +58,9 @@ def makeGif(segments: list[Segment], name : str = "Przyklad", q: Point = None, r
         ax.plot([A.x, C.x], [A.y, C.y], color = "green")
         ax.plot([B.x, D.x], [B.y, D.y], color = "green")
         if s == len(T.frames)-1:
-            found = T.query(q).data
-            print(q)
-            if q is not None: plt.scatter([q.x],[q.y], color = "red")
-            if found is not None:
+            if q is not None: 
+                plt.scatter([q.x],[q.y], color = "red")
+                found = T.query(q).data
                 A,B,C,D = found.trapezoidBoundary()
                 plt.plot([A.x, B.x], [A.y, B.y], color = "red")
                 plt.plot([C.x, D.x], [C.y, D.y], color = "red")
@@ -87,6 +87,7 @@ def drawAndSave(name: str = "test"):
         if q is not None:
             plik.write(f"Trapez w którym jest punkt: \n{T.query(q).data}")
     plik.close()
+    return T,q
 
 def fromFile(segments: list[Segment],q:Point = None, name: str = "test"):
     T = TrapezoidalMap(segments,True)
@@ -101,7 +102,7 @@ def fromFile(segments: list[Segment],q:Point = None, name: str = "test"):
         if q is not None:
             plik.write(f"Trapez w którym jest punkt: \n{T.query(q).data}")
     plik.close()
+    return T,q
 
-def drawAndMakeGif(name: str = "przyklad"):
-    segments, q = draw()
-    makeGif(segments,name,q)
+
+    
