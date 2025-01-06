@@ -41,36 +41,40 @@ def test(segments: list[Segment],flag: bool = True):
     # q = randomPoint(T)
     # if flag: showMap(T, T.getTrapezoids(), T.segments,q,T.query(q).data)
 
-size = [10,200,400,700,1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,15000,20000,40000,60000,80000,100000]
+size = [10,50,200,400,700,1000,3000,5000,8000,10000,15000,20000,30000,50000]
 
 def testTime(size: list[int]):
     buld = []
     search = []
     for i in size:
-        S = generateSegment(i)
-        start = time.time()
-        T = TrapezoidalMap(S)
-        end = time.time()
-        buld += [end - start]
-        print("rozmiar: ",i,"czas: ",end - start)
-        punkty = randomPoint(T, i)
-        start = time.time()
-        for q in punkty:
-            T.query(q).data
-        end = time.time()
-        search += [end - start]
-        print("rozmiar: ",i,"czas: ",end - start)
+        suma_czas = 0
+        suma_ilosc = 0
+        for j in range(10):
+            S = generateSegment(i)
+            start = time.time()
+            T = TrapezoidalMap(S)
+            end = time.time()
+            suma_czas += end - start
+            punkty = randomPoint(T, 1000)
+            start = time.time()
+            for q in punkty:
+                T.query(q).data
+            end = time.time()
+            suma_ilosc += end - start
+        print("n",i,"kosntrukcja: ",suma_czas/10,"wyszukanie: ",suma_ilosc)
+        search += [suma_ilosc/10]
+        buld += [suma_czas/10]
+    
     z_b = np.polyfit(size, buld, 1)
     p_b = np.poly1d(z_b)
-    plt.title("Zależność czasu od liczby odcinków oraz od liczby wyszukiwań")
-    plt.xlabel("Liczba odcinków S i wyszukiwań")
-    plt.ylabel("sekundy")
-    # plt.plot(size, p_b(size))
-    # plt.scatter(size, buld, color = 'green')
-    z_s = np.polyfit(size, search, 1)
+    plt.plot(size, p_b(size))
+    plt.scatter(size, buld, color = 'green')
+    plt.show()
+    z_s = np.polyfit(size, search, 4)
     p_s = np.poly1d(z_s)
     plt.plot(size, p_s(size))
     plt.scatter(size, search, color = 'blue')
     plt.show()
+    print(buld,search)
 
 testTime(size)
