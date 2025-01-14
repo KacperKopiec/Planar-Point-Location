@@ -72,7 +72,7 @@ def makeGif(segments: list[Segment], name : str = "Przyklad", q: Point = None, r
         buf.seek(0)
         frames.append(Image.open(buf)) 
         plt.close(fig)
-    frames[0].save(f'../gify/{name}.gif', save_all=True, append_images=frames[1:], duration=200, loop=0)
+    frames[0].save(f'../gify/{name}.gif', save_all=True, append_images=frames[1:], duration=500, loop=0)
     
 def drawAndSave(name: str = "test"):
     segments,q = draw()
