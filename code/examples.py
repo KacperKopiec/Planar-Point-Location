@@ -51,3 +51,10 @@ calosc = [
     Segment(Point(58, -107), Point(623, -202)),
     Segment(Point(246, -14), Point(431, 17)),
 ]
+
+rectangle = [
+    Segment(Point(3, 0), Point(-1, -3)),
+    Segment(Point(-1, -3), Point(-3, 0)),
+    Segment(Point(-3, 0), Point(1, 3)),
+    Segment(Point(1, 3), Point(3, 0)),
+]

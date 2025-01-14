@@ -16,6 +16,7 @@ class TrapezoidalMap:
         self.frames = [self.getTrapezoids()]
         for i, s in enumerate(self.segments):
             intersections = self.intersectingTrapezoids(s)
+            print(i, len(intersections))
             if len(intersections) == 1:
                 self.changeOne(intersections[0], s)
             else:
@@ -125,6 +126,7 @@ class TrapezoidalMap:
         mergeUp = -1
         upTrap, downTrap = None, None
         for idx, node in enumerate(nodes):
+            print(idx, node.data)
             if idx == 0:
                 nd = PointNode(segment.left)
                 nd.setLeft(TrapezoidNode(Trapezoid(node.data.left, segment.left, node.data.top, node.data.bottom)))

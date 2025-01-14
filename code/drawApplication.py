@@ -19,7 +19,7 @@ def draw():
         nonlocal points
         point = Point(event.x, event.y)
         points += [point]
-        canvas.create_oval(point.x - 2, point.y - 2, point.x + 2, point.y + 2, fill = "black", width = 1)
+        canvas.create_oval(point.x - 4, point.y - 4, point.x + 4, point.y + 4, fill = "blue", width = 10)
     def end_line(event):
         nonlocal vertices
         nonlocal new_vertices
@@ -38,8 +38,8 @@ def draw():
         else:
             point = Point(event.x, event.y)
             points += [point]
-            canvas.create_oval(point.x - 2, point.y - 2, point.x + 2, point.y + 2, fill = "black", width = 1)
-            canvas.create_line(points[-2].to_tuple(), points[-1].to_tuple(), fill="black",width = 4)
+            canvas.create_oval(point.x - 2, point.y - 2, point.x + 2, point.y + 2, fill = "blue", width = 5)
+            canvas.create_line(points[-2].to_tuple(), points[-1].to_tuple(), fill="white",width = 4)
             lines += [Segment(points[-2],points[-1])]
     canvas.bind('<Button-1>', start_line)
     canvas.bind('<ButtonRelease-1>',end_line)
@@ -51,10 +51,10 @@ def draw():
         nonlocal lines
         nonlocal new_lines
         new_lines = [Segment(Point(seg.left.x,500-seg.left.y),Point(seg.right.x,500-seg.right.y)) for seg in lines]
-        # print("segments = [")
-        # for a, b in new_lines:
-        #     print(f"    Segment(Point{a}, Point{b}),")
-        # print("]")
+        print("segments = [")
+        for a in new_lines:
+            print(f"    Segment(Point{a.left}, Point{a.right}),")
+        print("]")
         root.quit()
         root.destroy() 
     close = tk.Button(root, text= "Koniec odcinków", command = add_point)

@@ -14,7 +14,7 @@ def randomPoint(mapa : TrapezoidalMap, n: int = 1):
 def changeToSegments(lista: list[tuple]):
     segments = []
     for a,b in lista:
-        segments+=[Segment(Point(a.x,a.y),Point(b.x,b.y))]
+        segments+=[Segment(Point(a[0],a[1]),Point(b[0],b[1]))]
     return segments
 
 def generateSegment(n: int,a: int = 0,b: int = 1000):

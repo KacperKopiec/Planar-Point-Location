@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import io
 from drawApplication import *
+from examples import *
 
 
 def showMap(map: TrapezoidalMap, Trapezoids: list[Trapezoid], lines: list[Segment], q: Point = None):
@@ -38,7 +39,7 @@ def mapBuildingSteps(segments: list[Segment],q : Point = None, random=True):
     T = TrapezoidalMap(segments, visualisation=True, random=random)
     for s in range(len(T.frames)):
         showMap(T, T.frames[s], T.segments[:s])
-    showMap()
+    # showMap()
 
 def makeGif(segments: list[Segment], name : str = "Przyklad", q: Point = None, random=True):
     T = TrapezoidalMap(segments, visualisation=True, random=random)
@@ -103,3 +104,68 @@ def fromFile(segments: list[Segment],q:Point = None, name: str = "test"):
             plik.write(f"Trapez w którym jest punkt: \n{T.query(q).data}")
     plik.close()
     return T,q
+
+def showMapInteractive(map: TrapezoidalMap, Trapezoids: list[Trapezoid], lines: list[Segment]):
+    def on_move(event):
+        if event.inaxes:
+            A,B,C,D = map.createBoundary().trapezoidBoundary()
+            q = Point(event.xdata, event.ydata)
+            if A.x <= q.x <= C.x and A.y <= q.y <= B.y:
+                plt.clf()
+                plt.axis("off")
+                for line in lines:
+                    plt.plot([line.left.x, line.right.x], [ line.left.y, line.right.y], color = "blue")
+                for trapez in Trapezoids:
+                    A,B,C,D = trapez.trapezoidBoundary()
+                    plt.plot([A.x, B.x], [A.y, B.y], color = "green")
+                    plt.plot([C.x, D.x], [C.y, D.y], color = "green")
+                A,B,C,D = map.createBoundary().trapezoidBoundary()
+                plt.plot([A.x, B.x], [A.y, B.y], color = "black")
+                plt.plot([C.x, D.x], [C.y, D.y], color = "black")
+                plt.plot([A.x, C.x], [A.y, C.y], color = "black")
+                plt.plot([B.x, D.x], [B.y, D.y], color = "black")
+
+                plt.scatter([q.x],[q.y], color = "red")
+
+                found = map.query(q).data
+                A,B,C,D = found.trapezoidBoundary()
+                plt.plot([A.x, B.x], [A.y, B.y], color = "red")
+                plt.plot([C.x, D.x], [C.y, D.y], color = "red")
+                plt.plot([A.x, C.x], [A.y, C.y], color = "red")
+                plt.plot([B.x, D.x], [B.y, D.y], color = "red")
+
+                plt.draw()
+            else:
+                plt.clf()
+                plt.axis("off")
+                for line in lines:
+                    plt.plot([line.left.x, line.right.x], [ line.left.y, line.right.y], color = "blue")
+                for trapez in Trapezoids:
+                    A,B,C,D = trapez.trapezoidBoundary()
+                    plt.plot([A.x, B.x], [A.y, B.y], color = "green")
+                    plt.plot([C.x, D.x], [C.y, D.y], color = "green")
+                A,B,C,D = map.createBoundary().trapezoidBoundary()
+                plt.plot([A.x, B.x], [A.y, B.y], color = "black")
+                plt.plot([C.x, D.x], [C.y, D.y], color = "black")
+                plt.plot([A.x, C.x], [A.y, C.y], color = "black")
+                plt.plot([B.x, D.x], [B.y, D.y], color = "black")
+
+                plt.draw()
+
+
+    plt.figure(figsize = (5,5))
+    plt.axis("off")
+    for line in lines:
+        plt.plot([line.left.x, line.right.x], [ line.left.y, line.right.y], color = "blue")
+    for trapez in Trapezoids:
+        A,B,C,D = trapez.trapezoidBoundary()
+        plt.plot([A.x, B.x], [A.y, B.y], color = "green")
+        plt.plot([C.x, D.x], [C.y, D.y], color = "green")
+    A,B,C,D = map.createBoundary().trapezoidBoundary()
+    plt.plot([A.x, B.x], [A.y, B.y], color = "black")
+    plt.plot([C.x, D.x], [C.y, D.y], color = "black")
+    plt.plot([A.x, C.x], [A.y, C.y], color = "black")
+    plt.plot([B.x, D.x], [B.y, D.y], color = "black")
+
+    plt.connect('motion_notify_event', on_move)
+    plt.show(block=True)
