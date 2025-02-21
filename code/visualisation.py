@@ -169,3 +169,10 @@ def showMapInteractive(map: TrapezoidalMap, Trapezoids: list[Trapezoid], lines: 
 
     plt.connect('motion_notify_event', on_move)
     plt.show(block=True)
+
+def plotSegments(lines):
+    plt.figure(figsize = (5,5))
+    plt.axis("off")
+    for line in lines:
+        plt.plot([line.left.x, line.right.x], [ line.left.y, line.right.y], color = "blue")
+    plt.show()
